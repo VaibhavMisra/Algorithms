@@ -1,5 +1,22 @@
 import UIKit
 
+//https://www.hackerrank.com/challenges/minimum-distances/problem
+func minimumDistances(a: [Int]) -> Int {
+    var minD = -1
+    var posDict = [Int: Int]()
+    for (index, num) in a.enumerated() {
+        if let pos = posDict[num] {
+            let distance = abs(index - pos)
+            minD = (minD != -1 && minD <= distance) ? minD : distance
+        } else {
+            posDict[num] = index
+        }
+    }
+    return minD
+}
+let arr = [7, 1, 3, 4, 1, 7]
+print(minimumDistances(a: arr))
+
 //https://www.hackerrank.com/challenges/chocolate-feast/problem
 func chocolateFeast(n: Int, c: Int, m: Int) -> Int {
     var chocs: Int = n/c
