@@ -1,5 +1,12 @@
 import UIKit
 
+//https://www.hackerrank.com/challenges/sherlock-and-squares/problem
+func squares(a: Int, b: Int) -> Int {
+    return Int(floor(Double(b).squareRoot()) - ceil(Double(a).squareRoot()) + 1)
+}
+
+print(squares(a: 4, b: 4))
+
 //https://www.hackerrank.com/challenges/minimum-distances/problem
 func minimumDistances(a: [Int]) -> Int {
     var minD = -1
