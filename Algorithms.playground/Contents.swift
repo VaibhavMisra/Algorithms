@@ -1,5 +1,26 @@
 import UIKit
 
+//https://www.hackerrank.com/challenges/equality-in-a-array/problem
+func equalizeArray(arr: [Int]) -> Int {
+    var reps = [Int: Int]()
+    for num in arr {
+        if let count = reps[num] {
+            reps[num] = count + 1
+        }
+        else {
+            reps[num] = 1
+        }
+    }
+    var max = 0
+    for (_, value) in reps {
+        max = value > max ? value : max
+    }
+    return arr.count - max
+}
+
+let arr = [3, 3, 2, 1, 3]
+print(equalizeArray(arr: arr))
+
 //https://www.hackerrank.com/challenges/sherlock-and-squares/problem
 func squares(a: Int, b: Int) -> Int {
     return Int(floor(Double(b).squareRoot()) - ceil(Double(a).squareRoot()) + 1)
