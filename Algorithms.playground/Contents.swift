@@ -1,5 +1,38 @@
 import UIKit
 
+//https://www.hackerrank.com/challenges/equal-stacks/problem
+func equalStacks(h1: [Int], h2: [Int], h3: [Int]) -> Int {
+    var s1 = h1
+    var s2 = h2
+    var s3 = h3
+    
+    var sumH1 = h1.reduce(0, +)
+    var sumH2 = h2.reduce(0, +)
+    var sumH3 = h3.reduce(0, +)
+    
+    while !(sumH1 == sumH2 && sumH1 == sumH3) {
+        if sumH1 == 0 || sumH2 == 0 || sumH3 == 0 {
+            sumH1 = 0
+            break
+        }
+        if sumH1 > sumH2 && sumH1 > sumH3 {
+            sumH1 -= s1.popLast() ?? 0
+        }
+        else if sumH2 > sumH1 && sumH2 > sumH3 {
+            sumH2 -= s2.popLast() ?? 0
+        }
+        else if sumH3 > sumH1 && sumH3 > sumH2 {
+            sumH3 -= s3.popLast() ?? 0
+        }
+    }
+    return sumH1
+}
+
+let a = [1, 1, 1, 2, 3]
+let b = [2, 3, 4]
+let c = [1, 4, 1, 1]
+print(equalStacks(h1: a, h2: b, h3: c))
+
 //https://www.hackerrank.com/challenges/equality-in-a-array/problem
 func equalizeArray(arr: [Int]) -> Int {
     var reps = [Int: Int]()
