@@ -1,5 +1,18 @@
 import UIKit
 
+//https://www.hackerrank.com/challenges/strange-code/problem
+func strangeCounter(t: Int) -> Int {
+    var t = t
+    var rem = 3
+    while t > rem {
+        t = t - rem
+        rem *= 2
+    }
+    return (rem - t + 1)
+}
+
+print(strangeCounter(t: 1000000000000))
+
 //https://www.hackerrank.com/challenges/equal-stacks/problem
 func equalStacks(h1: [Int], h2: [Int], h3: [Int]) -> Int {
     var s1 = h1
