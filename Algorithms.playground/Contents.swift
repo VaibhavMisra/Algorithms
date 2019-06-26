@@ -1,5 +1,24 @@
 import UIKit
 
+//https://www.hackerrank.com/challenges/library-fine/problem
+func libraryFine(d1: Int, m1: Int, y1: Int, d2: Int, m2: Int, y2: Int) -> Int {
+    var fine = 0
+    if y1 > y2 {
+        fine = 10000
+    } else if y1 == y2 {
+        if m1 > m2 {
+            fine = (m1 - m2) * 500
+        } else if m1 == m2 {
+            if d1 > d2 {
+                fine = (d1 - d2) * 15
+            }
+        }
+    }
+    return fine
+}
+
+print(libraryFine(d1: 2, m1: 7, y1: 1014, d2: 1, m2: 1, y2: 1015))
+
 //https://www.hackerrank.com/challenges/strange-code/problem
 func strangeCounter(t: Int) -> Int {
     var t = t
@@ -88,8 +107,8 @@ func minimumDistances(a: [Int]) -> Int {
     }
     return minD
 }
-let arr = [7, 1, 3, 4, 1, 7]
-print(minimumDistances(a: arr))
+let arrMD = [7, 1, 3, 4, 1, 7]
+print(minimumDistances(a: arrMD))
 
 //https://www.hackerrank.com/challenges/chocolate-feast/problem
 func chocolateFeast(n: Int, c: Int, m: Int) -> Int {
@@ -227,11 +246,11 @@ func minCost(_ cost: [Int], index: Int) -> Int {
                minCost(cost, index: index-1))
 }
 
-let a: [Int] = [16, 19, 10, 12, 18]
-print(minCostClimbingStairs(a))
+let aMC: [Int] = [16, 19, 10, 12, 18]
+print(minCostClimbingStairs(aMC))
 
-let b: [Int] = [2, 5, 3, 1, 7, 3, 4]
-print(minCostClimbingStairs(b))
+let bMC: [Int] = [2, 5, 3, 1, 7, 3, 4]
+print(minCostClimbingStairs(bMC))
 
 //Search in rotated array
 //https://www.geeksforgeeks.org/search-an-element-in-a-sorted-and-pivoted-array/
