@@ -1,5 +1,40 @@
 import UIKit
 
+func prodOfHighestThree(ar: [Int]) -> Int {
+    let resStr = ar.map{String($0)}.joined(separator: " ")
+    var prod = 1
+    print(resStr)
+    if ar.count < 3 {
+        print("-1")
+    }
+    else {
+        let sorted = ar.sorted(by: >)
+        
+        for i in 0...2 {
+            prod *= abs(sorted[i])
+        }
+    }
+    
+    return prod
+}
+
+print(prodOfHighestThree(ar: [3, 8, 1, 2, 5]))
+
+//https://www.hackerrank.com/challenges/jim-and-the-orders/problem
+func jimOrders(orders: [[Int]]) -> [Int] {
+    var serveTimes = [Int: Int]()
+    for (index, order) in orders.enumerated() {
+        let serveTime = order[0] + order[1]
+        serveTimes[index + 1] = serveTime
+    }
+    let sortedKeys = serveTimes.values.sorted()
+    var result = [Int]()
+    for key in sortedKeys {
+        result.append(serveTimes[key]!)
+    }
+    return result
+}
+
 //https://www.hackerrank.com/challenges/library-fine/problem
 func libraryFine(d1: Int, m1: Int, y1: Int, d2: Int, m2: Int, y2: Int) -> Int {
     var fine = 0
