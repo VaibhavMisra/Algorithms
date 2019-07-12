@@ -1,5 +1,28 @@
 import UIKit
 
+//https://www.hackerrank.com/challenges/halloween-sale/problem
+func howManyGames(p: Int, d: Int, m: Int, s: Int) -> Int {
+    // Return the number of games you can buy
+    var total = 0
+    var money = s
+    var curRate = p
+    while money - curRate >= 0 {
+        money -= curRate
+        if curRate - d > m {
+            curRate -= d
+        }
+        else {
+            curRate = m
+        }
+        total += 1
+    }
+    return total
+}
+
+print(howManyGames(p: 16, d: 2, m: 1, s: 9981))
+print(howManyGames(p: 20, d: 3, m: 6, s: 85))
+
+
 func prodOfHighestThree(ar: [Int]) -> Int {
     let resStr = ar.map{String($0)}.joined(separator: " ")
     var prod = 1
