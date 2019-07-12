@@ -1,5 +1,18 @@
 import UIKit
 
+//https://www.hackerrank.com/challenges/manasa-and-stones/problem
+func stones(n: Int, a: Int, b: Int) -> [Int] {
+    var res = [Int]()
+    var num = (n-1) * min(a, b)
+    while num <= (n-1) * (max(a,b)) {
+        res.append(num)
+        num += abs(a-b) == 0 ? a : abs(a-b)
+    }
+    return res
+}
+print(stones(n: 4, a: 10, b: 100))
+print(stones(n: 3, a: 1, b: 2))
+
 //https://www.hackerrank.com/challenges/halloween-sale/problem
 func howManyGames(p: Int, d: Int, m: Int, s: Int) -> Int {
     // Return the number of games you can buy
