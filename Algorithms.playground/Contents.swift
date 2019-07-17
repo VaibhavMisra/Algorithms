@@ -1,5 +1,45 @@
 import UIKit
 
+//https://www.hackerrank.com/challenges/anagram/problem
+func anagram(s: String) -> Int {
+    if s.count % 2 != 0 {
+        return -1
+    }
+    
+    let halfLenght = s.index(s.startIndex, offsetBy: (s.count/2))
+    let s1 = s[..<halfLenght]
+    let s2 = s[halfLenght...]
+    
+    var count1 = [Character: Int]()
+    for ch in s1 {
+        count1[ch] = count1[ch] != nil ? count1[ch]! + 1 : 1
+    }
+    
+    var count2 = [Character: Int]()
+    for ch in s2 {
+        if let c1 = count1[ch] {
+            count1[ch] = c1 - 1
+        }
+        else {
+            count2[ch] = count2[ch] != nil ? count2[ch]! + 1 : 1
+        }
+    }
+    
+    var diff  = 0
+    for (_, count) in count1 {
+        diff += abs(count)
+    }
+    for (_, count) in count2 {
+        diff += abs(count)
+    }
+    
+    return diff/2
+}
+
+print(anagram(s: "abc"))
+print(anagram(s: "aaabbb"))
+print(anagram(s: "xaxbbbxx"))
+
 //https://www.hackerrank.com/challenges/manasa-and-stones/problem
 func stones(n: Int, a: Int, b: Int) -> [Int] {
     var res = [Int]()
