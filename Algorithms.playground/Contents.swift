@@ -1,5 +1,42 @@
 import UIKit
 
+//Anagram - Booking
+func listAnagram(anagrams: [String]) -> [String] {
+    var results = [String]()
+    for i in 0..<anagrams.count {
+        var res = anagrams[i]
+        var hasAnagram = false
+        for j in i+1..<anagrams.count {
+            if isAnagram(s1: anagrams[i], s2: anagrams[j]) {
+                res += ", \(anagrams[j])"
+                hasAnagram = true
+            }
+        }
+        if hasAnagram {
+            results.append(res)
+        }
+    }
+    return results.sorted()
+}
+
+func isAnagram(s1: String, s2: String) -> Bool {
+    let compactS1 = String(s1.filter { !" \n\t\r".contains($0) })
+    let compactS2 = String(s2.filter { !" \n\t\r".contains($0) })
+    
+    let count1 = NSCountedSet()
+    for c in compactS1 {
+        count1.add(c)
+    }
+    let count2 = NSCountedSet()
+    for c in compactS2 {
+        count2.add(c)
+    }
+    return count1 == count2
+}
+
+let anagrams = ["dirty room", "tomato", "dormitory", "asas", "ootmat"]
+print(listAnagram(anagrams: anagrams))
+
 //https://www.hackerrank.com/challenges/anagram/problem
 func anagram(s: String) -> Int {
     if s.count % 2 != 0 {
