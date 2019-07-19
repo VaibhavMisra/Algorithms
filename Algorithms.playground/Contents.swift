@@ -1,5 +1,27 @@
 import UIKit
 
+//https://www.hackerrank.com/challenges/lisa-workbook/problem
+func workbook(n: Int, k: Int, arr: [Int]) -> Int {
+    var res = 0
+    var startPage = 1
+    var chapPages = 0
+    for i in arr {
+        chapPages = (i % k == 0) ? (i / k) : (i / k + 1)
+        for j in 0..<chapPages {
+            let pageNum = startPage + j
+            let firstQ = (j*k)+1
+            let lastQ = (j*k) + k < i ? (j*k) + k : i
+            if pageNum >= firstQ  && pageNum <= lastQ {
+                res += 1
+            }
+        }
+        startPage += chapPages
+    }
+    return res
+}
+
+print(workbook(n: 5, k: 3, arr: [4, 2, 6, 1, 10]))
+
 //Anagram - Booking
 func listAnagram(anagrams: [String]) -> [String] {
     var results = [String]()
