@@ -1,5 +1,26 @@
 import UIKit
 
+//https://www.hackerrank.com/challenges/fair-rations/problem
+func fairRations(B: [Int]) -> Int {
+    var arr = B
+    var count = 0
+    for i in 0..<arr.count-1 {
+        if arr[i] % 2 != 0 {
+            arr[i] += 1
+            arr[i+1] += 1
+            count += 2
+        }
+    }
+    if arr[arr.count-1] % 2 != 0 {
+        print("NO")
+        return -1
+    }
+    return count
+}
+
+print(fairRations(B: [1, 2]))
+print(fairRations(B: [4, 5, 6, 7]))
+
 //https://www.hackerrank.com/challenges/lisa-workbook/problem
 func workbook(n: Int, k: Int, arr: [Int]) -> Int {
     var res = 0
