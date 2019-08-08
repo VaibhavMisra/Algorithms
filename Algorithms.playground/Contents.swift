@@ -1,5 +1,23 @@
 import UIKit
 
+//https://leetcode.com/problems/two-sum/
+func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+    var res = [Int]()
+    var dict = [Int: Int]()
+    for (index, num) in nums.enumerated() {
+        let req = target - num
+        if let indexFirst = dict[req] {
+            res = [indexFirst, index]
+            break
+        }
+        dict[num] = index
+    }
+    return res
+}
+
+
+print(twoSum([2, 7, 11, 15], 9))
+
 //https://www.hackerrank.com/challenges/fair-rations/problem
 func fairRations(B: [Int]) -> Int {
     var arr = B
@@ -12,7 +30,6 @@ func fairRations(B: [Int]) -> Int {
         }
     }
     if arr[arr.count-1] % 2 != 0 {
-        print("NO")
         return -1
     }
     return count
@@ -225,9 +242,9 @@ print(strangeCounter(t: 1000000000000))
 
 //https://www.hackerrank.com/challenges/equal-stacks/problem
 func equalStacks(h1: [Int], h2: [Int], h3: [Int]) -> Int {
-    var s1 = h1
-    var s2 = h2
-    var s3 = h3
+    var s1 = Array(h1.reversed())
+    var s2 = Array(h2.reversed())
+    var s3 = Array(h3.reversed())
     
     var sumH1 = h1.reduce(0, +)
     var sumH2 = h2.reduce(0, +)
@@ -251,9 +268,9 @@ func equalStacks(h1: [Int], h2: [Int], h3: [Int]) -> Int {
     return sumH1
 }
 
-let a = [1, 1, 1, 2, 3]
-let b = [2, 3, 4]
-let c = [1, 4, 1, 1]
+let a = [3, 2, 1, 1, 1]
+let b = [4, 3, 2]
+let c = [1, 1, 4, 1]
 print(equalStacks(h1: a, h2: b, h3: c))
 
 //https://www.hackerrank.com/challenges/equality-in-a-array/problem
