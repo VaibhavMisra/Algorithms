@@ -1,5 +1,28 @@
 import UIKit
 
+//https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+func maxProfit(_ prices: [Int]) -> Int {
+    if prices.count <= 0 {
+        return 0
+    }
+    var stockPrice = prices[0], currProfit = 0, maxProfit = 0
+    for i in 1..<prices.count {
+        let price = prices[i]
+        if price < stockPrice {
+            stockPrice = price
+        } else {
+            currProfit = price - stockPrice
+        }
+        if currProfit > maxProfit {
+            maxProfit = currProfit
+        }
+    }
+    return maxProfit
+}
+
+print(maxProfit([7,1,5,3,6,4]))
+print(maxProfit([7,6,4,3,1]))
+
 //https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
 func twoSumSorted(_ numbers: [Int], _ target: Int) -> [Int] {
     var res = [Int]()
