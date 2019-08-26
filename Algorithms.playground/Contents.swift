@@ -1,5 +1,29 @@
 import UIKit
 
+//https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
+func twoSumSorted(_ numbers: [Int], _ target: Int) -> [Int] {
+    var res = [Int]()
+    var p = 0, q = numbers.count - 1
+    while p <= q {
+        let sum = numbers[p] + numbers[q]
+        if sum > target {
+            q -= 1
+        }
+        else if sum < target {
+            p += 1
+        }
+        else {
+            res = [p+1, q+1]
+            break
+        }
+    }
+    return res
+}
+
+print(twoSumSorted([-3, 3, 4, 90], 0))
+print(twoSumSorted([-1, 0], -1))
+print(twoSumSorted([2, 5, 7, 15], 9))
+
 //https://leetcode.com/problems/two-sum/
 func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
     var res = [Int]()
