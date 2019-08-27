@@ -2,15 +2,13 @@ import UIKit
 
 //https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
 func maxProfit2(_ prices: [Int]) -> Int {
-    var lastPrice = Int.max
+    guard prices.count > 1 else {
+        return 0
+    }
     var totalProfit = 0
-    for price in prices {
-        if price < lastPrice {
-            lastPrice = price
-        } else {
-            totalProfit += price - lastPrice
-            lastPrice = price
-        }
+    for i in 1..<prices.count {
+        let currProf = prices[i] - prices[i-1]
+        totalProfit += max(currProf, 0)
     }
     return totalProfit
 }
