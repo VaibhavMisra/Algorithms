@@ -1,5 +1,21 @@
 import UIKit
 
+//https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
+func maxProfit2(_ prices: [Int]) -> Int {
+    var lastPrice = Int.max
+    var totalProfit = 0
+    for price in prices {
+        if price < lastPrice {
+            lastPrice = price
+        } else {
+            totalProfit += price - lastPrice
+            lastPrice = price
+        }
+    }
+    return totalProfit
+}
+print(maxProfit2([7,1,5,3,6,4]))
+
 //https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 func maxProfit(_ prices: [Int]) -> Int {
     var minPrice = Int.max
