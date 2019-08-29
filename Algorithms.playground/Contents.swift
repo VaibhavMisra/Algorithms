@@ -1,5 +1,18 @@
 import UIKit
 
+//https://leetcode.com/problems/maximum-subarray/
+func maxSubArray(_ nums: [Int]) -> Int {
+    var currMax = nums[0],
+    var totalMax = currMax
+    for i in 1..<nums.count {
+        let num = nums[i]
+        currMax = max(num, currMax + num)
+        totalMax = max(totalMax, currMax)
+    }
+    return totalMax
+}
+print(maxSubArray([-2,1,-3,4,-1,2,1,-5,4]))
+
 //https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
 func maxProfit2(_ prices: [Int]) -> Int {
     guard prices.count > 1 else {
