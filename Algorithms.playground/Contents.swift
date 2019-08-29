@@ -2,11 +2,9 @@ import UIKit
 
 //https://leetcode.com/problems/maximum-subarray/
 func maxSubArray(_ nums: [Int]) -> Int {
-    var currMax = nums[0],
-    var totalMax = currMax
+    var currMax = nums[0], totalMax = nums[0]
     for i in 1..<nums.count {
-        let num = nums[i]
-        currMax = max(num, currMax + num)
+        currMax = max(currMax + nums[i], nums[i])
         totalMax = max(totalMax, currMax)
     }
     return totalMax
