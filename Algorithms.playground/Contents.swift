@@ -7,12 +7,8 @@ func findShortestSubArray(_ nums: [Int]) -> Int {
     var firstOccurence = [Int: Int]()
     var lastOccurence = [Int: Int]()
     for (index, num) in nums.enumerated() {
-        var newFreq = 0
-        if let freq = frequencies[num] {
-            newFreq = freq + 1
-        }
-        else {
-            newFreq = 1
+        let newFreq = frequencies[num, default: 0] + 1
+        if newFreq == 1 {
             firstOccurence[num] = index
         }
         lastOccurence[num] = index
