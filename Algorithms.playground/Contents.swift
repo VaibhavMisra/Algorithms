@@ -1,5 +1,41 @@
 import UIKit
 
+//https://leetcode.com/problems/degree-of-an-array/
+func findShortestSubArray(_ nums: [Int]) -> Int {
+    var degree = 0, minLength = Int.max
+    var frequencies = [Int: Int]()
+    var firstOccurence = [Int: Int]()
+    var lastOccurence = [Int: Int]()
+    for (index, num) in nums.enumerated() {
+        var newFreq = 0
+        if let freq = frequencies[num] {
+            newFreq = freq + 1
+        }
+        else {
+            newFreq = 1
+            firstOccurence[num] = index
+        }
+        lastOccurence[num] = index
+        frequencies[num] = newFreq
+        if newFreq >= degree {
+            let currLength = (lastOccurence[num]! - firstOccurence[num]! + 1)
+            if newFreq == degree {
+                if currLength < minLength {
+                    minLength = currLength
+                    degree = newFreq
+                }
+            }
+            else {
+                minLength = currLength
+                degree = newFreq
+            }
+        }
+    }
+    return minLength
+}
+print(findShortestSubArray([2,2,7,8,9,2,3,1,4,1,1]))
+print(findShortestSubArray([1, 2, 2, 3, 1]))
+
 //https://leetcode.com/problems/maximum-subarray/
 func maxSubArray(_ nums: [Int]) -> Int {
     var currMax = nums[0], totalMax = nums[0]
