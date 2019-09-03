@@ -3,19 +3,18 @@ import UIKit
 //https://leetcode.com/problems/remove-duplicates-from-sorted-array/
 func removeDuplicates(_ nums: inout [Int]) -> Int {
     guard nums.count > 0 else { return 0 }
-    var i = 1, lastNum = nums[0]
-    while i < nums.count {
-        if nums[i] == lastNum {
-            nums.remove(at: i)
-        } else {
-            lastNum = nums[i]
-            i += 1
+    var index = 0
+    for i in 1..<nums.count {
+        if nums[i] != nums[index] {
+            index += 1
+            nums[index] = nums[i]
         }
     }
-    return nums.count
+    nums.removeSubrange((index+1)...) //Optional
+    return index + 1
 }
-//var nums = [0,0,1,1,1,2,2,3,3,4]
-var nums = [Int]()
+var nums = [0,0,1,1,1,2,2,3,3,4]
+//var nums = [Int]()
 print(removeDuplicates(&nums))
 
 //https://leetcode.com/problems/degree-of-an-array/
