@@ -1,5 +1,25 @@
 import UIKit
 
+//https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/
+func removeDuplicates2(_ nums: inout [Int]) -> Int {
+    guard nums.count > 2 else { return nums.count }
+    var frequencies = [nums[0]: 1]
+    var index = 0
+    for i in 1..<nums.count {
+        if nums[i] != nums[index] || frequencies[nums[i], default: 0] < 2 {
+                index += 1
+                nums[index] = nums[i]
+                frequencies[nums[i]] = frequencies[nums[i], default: 0] + 1
+        }
+    }
+    nums.removeSubrange((index+1)...) //Optional
+    return index + 1
+}
+var dup = [0,0,1,1,1,1,2,3,3]
+print(removeDuplicates2(&dup))
+var dup1 = [1,1,1,2,2,3]
+print(removeDuplicates2(&dup1))
+
 //https://leetcode.com/problems/remove-duplicates-from-sorted-array/
 func removeDuplicates(_ nums: inout [Int]) -> Int {
     guard nums.count > 0 else { return 0 }
