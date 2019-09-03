@@ -1,5 +1,23 @@
 import UIKit
 
+//https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+func removeDuplicates(_ nums: inout [Int]) -> Int {
+    guard nums.count > 0 else { return 0 }
+    var i = 1, lastNum = nums[0]
+    while i < nums.count {
+        if nums[i] == lastNum {
+            nums.remove(at: i)
+        } else {
+            lastNum = nums[i]
+            i += 1
+        }
+    }
+    return nums.count
+}
+//var nums = [0,0,1,1,1,2,2,3,3,4]
+var nums = [Int]()
+print(removeDuplicates(&nums))
+
 //https://leetcode.com/problems/degree-of-an-array/
 func findShortestSubArray(_ nums: [Int]) -> Int {
     var degree = 0, minLength = Int.max
