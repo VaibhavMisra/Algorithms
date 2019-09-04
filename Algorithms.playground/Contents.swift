@@ -1,5 +1,73 @@
 import UIKit
 
+//https://leetcode.com/problems/add-two-numbers/
+
+//Definition for singly-linked list.
+public class ListNode {
+    public var val: Int
+    public var next: ListNode?
+    public init(_ val: Int) {
+        self.val = val
+        self.next = nil
+    }
+}
+
+func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+    guard var list1 = l1, var list2 = l2 else { return nil }
+    var isList1Complete = false, isList2Complete = false
+    var carry = 0
+    var resultHead, resultTail: ListNode?
+    while true {
+        let digit1 = isList1Complete == false ? list1.val : 0
+        let digit2 = isList2Complete == false ? list2.val : 0
+        let sum = digit1 + digit2 + carry
+        let digit3 = sum % 10
+        carry = sum / 10
+        
+        let tempListNode = ListNode(digit3)
+        if resultHead == nil {
+            resultHead = tempListNode
+            resultTail = tempListNode
+        } else {
+            resultTail?.next = tempListNode
+            resultTail = tempListNode
+        }
+        
+        if let next = list1.next {
+            isList1Complete = false
+            list1 = next
+        } else {
+            isList1Complete = true
+        }
+        
+        if let next = list2.next {
+            isList2Complete = false
+            list2 = next
+        } else {
+            isList2Complete = true
+        }
+        
+        if isList1Complete && isList2Complete && carry == 0 {
+            break
+        }
+    }
+    return resultHead
+}
+
+var l11 = ListNode(2)
+var l12 = ListNode(4)
+var l13 = ListNode(3)
+l11.next = l12
+l12.next = l13
+
+var l21 = ListNode(5)
+var l22 = ListNode(6)
+var l23 = ListNode(4)
+l21.next = l22
+l22.next = l23
+
+print(addTwoNumbers(l11, l21)?.val ?? "No sum found")
+
 //https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/
 func removeDuplicates2(_ nums: inout [Int]) -> Int {
     guard nums.count > 2 else { return nums.count }
