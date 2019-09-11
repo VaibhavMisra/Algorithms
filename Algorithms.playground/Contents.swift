@@ -3,20 +3,14 @@ import UIKit
 //https://leetcode.com/problems/longest-substring-without-repeating-characters/
 func lengthOfLongestSubstring(_ s: String) -> Int {
     var max = 0, startIndex = 0
-    var frequencies = [Character: [Int]]()
+    var lastIndices = [Character: Int]()
     for (index, char) in s.enumerated() {
-        
-        let freq = frequencies[char, default: [1, index]]
-//        print("Char: \(char)\nFreq: \(freq)\nStartIndex: \(startIndex)")
-        
-        if freq[1] < index && freq[1] >= startIndex {
-            startIndex = freq[1] + 1
+        if let lastIndex = lastIndices[char], lastIndex >= startIndex {
+            startIndex = lastIndex + 1
         }
-        
+        lastIndices[char] = index
         let curr = index - startIndex +  1
         max = max < curr ? curr : max
-        frequencies[char] = [freq[0] + 1, index]
-//        print("\nStartIndex: \(startIndex)\nNew Max: \(max)\n")
     }
     return max
 }
