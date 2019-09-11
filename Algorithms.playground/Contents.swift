@@ -1,7 +1,33 @@
 import UIKit
 
-//https://leetcode.com/problems/add-two-numbers/
+//https://leetcode.com/problems/longest-substring-without-repeating-characters/
+func lengthOfLongestSubstring(_ s: String) -> Int {
+    var max = 0, startIndex = 0
+    var frequencies = [Character: [Int]]()
+    for (index, char) in s.enumerated() {
+        
+        let freq = frequencies[char, default: [1, index]]
+//        print("Char: \(char)\nFreq: \(freq)\nStartIndex: \(startIndex)")
+        
+        if freq[1] < index && freq[1] >= startIndex {
+            startIndex = freq[1] + 1
+        }
+        
+        let curr = index - startIndex +  1
+        max = max < curr ? curr : max
+        frequencies[char] = [freq[0] + 1, index]
+//        print("\nStartIndex: \(startIndex)\nNew Max: \(max)\n")
+    }
+    return max
+}
 
+print(lengthOfLongestSubstring("tmmzuxt")) //5
+print(lengthOfLongestSubstring("dvdf")) // 3
+print(lengthOfLongestSubstring("pwwkew")) // 3
+print(lengthOfLongestSubstring("bbbb")) //1
+print(lengthOfLongestSubstring("abcabcbb")) //3
+
+//https://leetcode.com/problems/add-two-numbers/
 //Definition for singly-linked list.
 public class ListNode {
     public var val: Int
