@@ -1,5 +1,22 @@
 import UIKit
 
+//https://leetcode.com/problems/climbing-stairs/
+func climbStairs(_ n: Int) -> Int {
+    if (n < 3) {
+        return n
+    }
+    var mem = [1, 2]
+    for i in 2...n {
+        mem.append(mem[i-2] + mem[i-1])
+    }
+    return mem[n-1]
+}
+
+print(climbStairs(1))
+print(climbStairs(2))
+print(climbStairs(3))
+print(climbStairs(4))
+
 //https://leetcode.com/problems/plus-one/
 func plusOne(_ digits: [Int]) -> [Int] {
     var result = digits
