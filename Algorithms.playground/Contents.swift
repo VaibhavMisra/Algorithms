@@ -2,18 +2,18 @@ import UIKit
 
 //https://leetcode.com/problems/plus-one/
 func plusOne(_ digits: [Int]) -> [Int] {
-    var result = [Int]()
+    var result = digits
     var carry = 1
     for i in (0..<digits.count).reversed() {
         let sum = digits[i] + carry
-        let newDigit = sum % 10
+        let newDigit = sum >= 10 ? sum - 10 : sum
         carry = sum / 10
-        result.append(newDigit)
+        result[i] = newDigit
     }
     if carry > 0 {
-        result.append(carry)
+        result.insert(carry, at: 0)
     }
-    return result.reversed()
+    return result
 }
 
 print(plusOne([1,2,9]))
