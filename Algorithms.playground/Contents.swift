@@ -1,5 +1,24 @@
 import UIKit
 
+//https://leetcode.com/problems/plus-one/
+func plusOne(_ digits: [Int]) -> [Int] {
+    var result = [Int]()
+    var carry = 1
+    for i in (0..<digits.count).reversed() {
+        let sum = digits[i] + carry
+        let newDigit = sum % 10
+        carry = sum / 10
+        result.append(newDigit)
+    }
+    if carry > 0 {
+        result.append(carry)
+    }
+    return result.reversed()
+}
+
+print(plusOne([1,2,9]))
+print(plusOne([9,9,9]))
+
 //https://leetcode.com/problems/longest-substring-without-repeating-characters/
 func lengthOfLongestSubstring(_ s: String) -> Int {
     var max = 0, startIndex = 0
