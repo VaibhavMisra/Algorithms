@@ -5,8 +5,7 @@ func reverse(_ x: Int) -> Int {
     var result = 0
     var number = x
     while number != 0 {
-        let digit = number % 10
-        result = (result * 10) + digit
+        result = (result * 10) + (number % 10)
         number /= 10
     }
 
