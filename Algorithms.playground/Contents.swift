@@ -1,5 +1,27 @@
 import UIKit
 
+//https://leetcode.com/problems/reverse-integer/
+func reverse(_ x: Int) -> Int {
+    let isNegative = x < 0
+    var result = 0
+    let digits = String(x).compactMap{ $0.wholeNumberValue }
+    var multiplier = Int(pow(Double(10), Double(digits.count-1)))
+    for i in (0..<digits.count).reversed() {
+        result += digits[i] * multiplier
+        multiplier /= 10
+    }
+    
+    guard result > Int(Int32.min), result < Int(Int32.max) else {
+        return  0
+    }
+    
+    result = isNegative ? (result * -1) : result
+    return result
+}
+
+print(reverse(1534236469))
+print(reverse(-123))
+
 //https://leetcode.com/problems/climbing-stairs/
 func climbStairs(_ n: Int) -> Int {
     if (n < 3) {
