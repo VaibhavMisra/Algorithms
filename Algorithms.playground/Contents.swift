@@ -1,5 +1,29 @@
 import UIKit
 
+//https://leetcode.com/problems/valid-parentheses/
+func isValid(_ s: String) -> Bool {
+    let map: [Character: Character] = [
+        "(" : ")",
+        "{" : "}",
+        "[" : "]"
+    ]
+    
+    var stack = [Character]()
+    for char in s {
+        if let last = stack.last, map[last] == char {
+            stack.removeLast()
+            continue
+        }
+        stack.append(char)
+    }
+    return stack.isEmpty
+}
+
+print(isValid("){"))
+print(isValid("(]"))
+print(isValid("([)]"))
+print(isValid("{[]}"))
+
 //https://leetcode.com/problems/reverse-integer/
 func reverse(_ x: Int) -> Int {
     var result = 0
