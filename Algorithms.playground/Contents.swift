@@ -1,5 +1,39 @@
 import UIKit
 
+//Given a string 'aabccc', ouput -> a2b1c3
+func charCompress(s: String) -> String {
+    var result = ""
+    var lastChar: Character?
+    var count = 0
+    for char in s {
+        guard let last = lastChar else {
+            lastChar = char
+            count += 1
+            continue
+        }
+        
+        if char == last {
+            count += 1
+        } else {
+            result += "\(last)\(count)"
+            lastChar = char
+            count = 1
+        }
+        print("Char:\(char), Result:\(result)")
+    }
+    
+    if let last = lastChar {
+        result += "\(last)\(count)"
+    }
+    
+    return result
+}
+
+print(charCompress(s: ""))
+print(charCompress(s: "abc"))
+print(charCompress(s: "abbcccc"))
+print(charCompress(s: "aabcc"))
+
 //https://leetcode.com/problems/valid-parentheses/
 func isValid(_ s: String) -> Bool {
     let map: [Character: Character] = [
