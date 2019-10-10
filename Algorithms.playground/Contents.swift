@@ -1,5 +1,33 @@
 import UIKit
 
+//https://leetcode.com/problems/evaluate-reverse-polish-notation/
+func evalRPN(_ tokens: [String]) -> Int {
+    var stack = [Int]()
+    for token in tokens {
+        if token == "+" || token == "-" || token == "*" || token == "/" {
+            var result = 0
+            let operand2 = stack.removeLast()
+            let operand1 = stack.removeLast()
+            switch token {
+            case "+": result = operand1 + operand2
+            case "-": result = operand1 - operand2
+            case "*": result = operand1 * operand2
+            case "/": result = operand1 / operand2
+            default:
+                result = 0
+            }
+            stack.append(result)
+        } else {
+            stack.append(Int(token) ?? 0)
+        }
+    }
+    return stack.last ?? 0
+}
+
+print(evalRPN(["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"]))
+print(evalRPN(["4", "13", "5", "/", "+"]))
+print(evalRPN(["2", "1", "+", "3", "*"]))
+
 //Given a string 'aabccc', ouput -> a2b1c3
 func charCompress(s: String) -> String {
     var result = ""
