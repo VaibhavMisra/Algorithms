@@ -1,5 +1,49 @@
 import UIKit
 
+
+//https://leetcode.com/problems/maximum-depth-of-binary-tree/
+//Definition for a binary tree node.
+public class TreeNode {
+    public var val: Int
+    public var left: TreeNode?
+    public var right: TreeNode?
+    public init(_ val: Int) {
+        self.val = val
+        self.left = nil
+        self.right = nil
+    }
+}
+
+func maxDepth(_ root: TreeNode?) -> Int {
+    
+    guard let rootNode = root else {
+        return 0
+    }
+    return 1 + max(maxDepth(rootNode.left), maxDepth(rootNode.right))
+}
+
+
+
+let treeNode1 = TreeNode(9)
+let treeNode2 = TreeNode(20)
+let treeNode3 = TreeNode(15)
+let treeNode4 = TreeNode(7)
+treeNode2.left = treeNode3
+treeNode3.right = treeNode4
+
+let root = TreeNode(3)
+root.left = treeNode1
+root.right = treeNode2
+
+print(maxDepth(root))
+
+//https://leetcode.com/problems/string-compression/
+//func compress(_ chars: inout [Character]) -> Int {
+//
+//}
+
+
+
 //https://leetcode.com/problems/evaluate-reverse-polish-notation/
 func evalRPN(_ tokens: [String]) -> Int {
     var stack = [Int]()
