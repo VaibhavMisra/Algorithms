@@ -16,25 +16,20 @@ public class TreeNode {
 
 //https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
 func sortedArrayToBST(_ nums: [Int]) -> TreeNode? {
-    print(nums)
-    guard nums.count > 0 else { return nil }
-    
-    guard nums.count != 1  else { return TreeNode(nums[0]) }
-    
-    
-    
-    let middleIndex = nums.count / 2
-    let nextToMiddle = nums.index(middleIndex, offsetBy: 1)
-    let val = nums[middleIndex]
-    let root = TreeNode(val)
-    
-    let leftArr = Array(nums[..<middleIndex])
-    let rightArr = Array(nums[nextToMiddle...])
-    
-    root.left = sortedArrayToBST(leftArr)
-    root.right = sortedArrayToBST(rightArr)
-    
-    return root
+    if nums.count == 0 {
+        return nil
+    }
+    func toTree(_ l: Int, _ r: Int) -> TreeNode? {
+        if l > r { return nil}
+        if l == r { return TreeNode(nums[l])}
+        let mid = (l+r)>>1
+
+        let root = TreeNode(nums[mid])
+        root.left = toTree(l, mid-1)
+        root.right = toTree(mid+1, r)
+        return root
+    }
+    return toTree(0, nums.count-1)
 }
 
 print(sortedArrayToBST([-10,-3,5,9])?.val)
