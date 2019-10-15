@@ -1,7 +1,7 @@
 import UIKit
 
 
-//https://leetcode.com/problems/maximum-depth-of-binary-tree/
+
 //Definition for a binary tree node.
 public class TreeNode {
     public var val: Int
@@ -14,6 +14,33 @@ public class TreeNode {
     }
 }
 
+//https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
+func sortedArrayToBST(_ nums: [Int]) -> TreeNode? {
+    print(nums)
+    guard nums.count > 0 else { return nil }
+    
+    guard nums.count != 1  else { return TreeNode(nums[0]) }
+    
+    
+    
+    let middleIndex = nums.count / 2
+    let nextToMiddle = nums.index(middleIndex, offsetBy: 1)
+    let val = nums[middleIndex]
+    let root = TreeNode(val)
+    
+    let leftArr = Array(nums[..<middleIndex])
+    let rightArr = Array(nums[nextToMiddle...])
+    
+    root.left = sortedArrayToBST(leftArr)
+    root.right = sortedArrayToBST(rightArr)
+    
+    return root
+}
+
+print(sortedArrayToBST([-10,-3,5,9])?.val)
+print(sortedArrayToBST([-10,-3,0,5,9])?.val)
+
+//https://leetcode.com/problems/maximum-depth-of-binary-tree/
 func maxDepth(_ root: TreeNode?) -> Int {
     guard let root = root else {
         return 0
