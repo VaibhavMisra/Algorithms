@@ -2,6 +2,27 @@ import UIKit
 
 
 
+//https://leetcode.com/problems/merge-sorted-array/
+func merge(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
+    var i = 0, j = 0
+    while j < n {
+        if i >= m+j || nums2[j] < nums1[i] {
+            nums1.insert(nums2[j], at: i)
+            nums1.removeLast()
+            j += 1
+        }
+        i += 1
+    }
+}
+
+var nums1 = [1,2,3,0,0,0]
+let m = 3
+let nums2 = [2,5,6]
+let n = 3
+
+merge(&nums1, m, nums2, n)
+print(nums1)
+
 //Definition for a binary tree node.
 public class TreeNode {
     public var val: Int
@@ -32,8 +53,8 @@ func sortedArrayToBST(_ nums: [Int]) -> TreeNode? {
     return toTree(0, nums.count-1)
 }
 
-print(sortedArrayToBST([-10,-3,5,9])?.val)
-print(sortedArrayToBST([-10,-3,0,5,9])?.val)
+print(sortedArrayToBST([-10,-3,5,9])?.val ?? 0)
+print(sortedArrayToBST([-10,-3,0,5,9])?.val ?? 0)
 
 //https://leetcode.com/problems/maximum-depth-of-binary-tree/
 func maxDepth(_ root: TreeNode?) -> Int {
@@ -61,6 +82,7 @@ root.left = treeNode1
 root.right = treeNode2
 
 print(maxDepth(root))
+
 
 //https://leetcode.com/problems/string-compression/
 //func compress(_ chars: inout [Character]) -> Int {
