@@ -1,5 +1,23 @@
 import UIKit
 
+//https://leetcode.com/problems/pascals-triangle/
+func generatePascal(_ numRows: Int) -> [[Int]] {
+    var result = [[Int]]()
+    for i in 0..<numRows {
+        var row = [Int]()
+        for j in 0...i {
+            if i > 0 && j > 0 && j != i {
+                row.append(result[i-1][j-1] + result[i-1][j])
+            } else {
+                row.append(1)
+            }
+        }
+        result.append(row)
+    }
+    return result
+}
+
+print(generatePascal(5))
 
 
 //https://leetcode.com/problems/merge-sorted-array/
