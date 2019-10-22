@@ -4,16 +4,17 @@ import UIKit
 //https://leetcode.com/problems/container-with-most-water/
 func maxArea(_ height: [Int]) -> Int {
     var maxArea = 0
-    
-    for i in 0..<height.count {
-        let next = i + 1
-        for j in next..<height.count {
-            let area = (j - i) * min(height[i], height[j])
-            maxArea = max(maxArea, area)
-            print("h[\(i)]: \(height[i]), h[\(j)]: \(height[j]), max: \(maxArea)")
+    var first = 0
+    var last = height.count - 1
+    while first < last {
+        let area = (last - first) * min(height[first], height[last])
+        maxArea = max(maxArea, area)
+        if height[first] < height[last] {
+            first += 1
+        } else {
+            last -= 1
         }
     }
-    
     return maxArea
 }
 
