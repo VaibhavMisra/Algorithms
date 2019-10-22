@@ -1,5 +1,25 @@
 import UIKit
 
+
+//https://leetcode.com/problems/container-with-most-water/
+func maxArea(_ height: [Int]) -> Int {
+    var maxArea = 0
+    
+    for i in 0..<height.count {
+        let next = i + 1
+        for j in next..<height.count {
+            let area = (j - i) * min(height[i], height[j])
+            maxArea = max(maxArea, area)
+            print("h[\(i)]: \(height[i]), h[\(j)]: \(height[j]), max: \(maxArea)")
+        }
+    }
+    
+    return maxArea
+}
+
+print(maxArea([1,1]))
+print(maxArea([1,8,6,2,5,4,8,3,7]))
+
 //https://leetcode.com/problems/pascals-triangle/
 func generatePascal(_ numRows: Int) -> [[Int]] {
     var result = [[Int]]()
