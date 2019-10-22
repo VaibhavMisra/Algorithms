@@ -1,6 +1,40 @@
 import UIKit
 
 
+//https://leetcode.com/problems/group-anagrams/
+func groupAnagrams(_ strs: [String]) -> [[String]] {
+    
+    func getCharacterMap(for str: String) -> [Character: Int] {
+        let strLow = str.lowercased()
+        var map = [Character: Int]()
+        for char in strLow {
+            let currentCount = map[char, default: 0]
+            map[char] = currentCount + 1
+        }
+        return map
+    }
+    
+    var charMaps = [[Character: Int]: [String]]()
+    for string in strs {
+        let strLower = string.lowercased()
+        let charMap = getCharacterMap(for: strLower)
+        if var curr = charMaps[charMap] {
+            curr.append(string)
+            charMaps[charMap] = curr
+        } else {
+            charMaps[charMap] = [string]
+        }
+    }
+    
+    var result = [[String]]()
+    for (_, value) in charMaps {
+        result.append(value)
+    }
+    return result
+}
+
+print(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))
+
 //https://leetcode.com/problems/container-with-most-water/
 func maxArea(_ height: [Int]) -> Int {
     var maxArea = 0
