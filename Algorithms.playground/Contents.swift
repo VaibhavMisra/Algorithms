@@ -1,13 +1,40 @@
 import UIKit
 
+//https://leetcode.com/problems/merge-intervals/
+func mergeIntervals(_ intervals: [[Int]]) -> [[Int]] {
+    
+    guard intervals.count > 0 else { return [[Int]]() }
+    
+    let sortedIntervals = intervals.sorted { $0[0] < $1[0] }
+    var result = [[Int]]()
+    result.append(sortedIntervals[0])
+    
+    for i in 1..<sortedIntervals.count {
+        let current = sortedIntervals[i]
+        if var last = result.last, last[1] >= current[0]  {
+            last[1] = last[1] > current[1] ? last[1] : current[1]
+            result.removeLast()
+            result.append(last)
+        } else {
+            result.append(current)
+        }
+    }
+    return result
+}
+
+print(mergeIntervals([]))
+print(mergeIntervals([[2,4],[5,8], [1,9]]))
+print(mergeIntervals([[1,4],[0,4]]))
+print(mergeIntervals([[1,3],[2,6],[8,10],[15,18]]))
+print(mergeIntervals([[1,4],[4,5]]))
+print(mergeIntervals([[1,8], [2,3], [6,7]]))
 
 //https://leetcode.com/problems/group-anagrams/
 func groupAnagrams(_ strs: [String]) -> [[String]] {
     
     func getCharacterMap(for str: String) -> [Character: Int] {
-        let strLow = str.lowercased()
         var map = [Character: Int]()
-        for char in strLow {
+        for char in str {
             let currentCount = map[char, default: 0]
             map[char] = currentCount + 1
         }
@@ -16,8 +43,7 @@ func groupAnagrams(_ strs: [String]) -> [[String]] {
     
     var charMaps = [[Character: Int]: [String]]()
     for string in strs {
-        let strLower = string.lowercased()
-        let charMap = getCharacterMap(for: strLower)
+        let charMap = getCharacterMap(for: string)
         if var curr = charMaps[charMap] {
             curr.append(string)
             charMaps[charMap] = curr
