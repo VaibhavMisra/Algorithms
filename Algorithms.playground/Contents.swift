@@ -1,5 +1,79 @@
 import UIKit
 
+//https://leetcode.com/problems/search-in-rotated-sorted-array/
+func findPivot(nums: [Int]) -> Int {
+    
+    if nums[0] < nums.last! {
+        return 0
+    }
+    
+    var l = 0, r = nums.count - 1
+    while l <= r {
+        let m = l + (r - l)/2
+        if m < nums.count - 1 && nums[m] > nums[m+1] {
+            return m + 1
+        } else if nums[l] <= nums[m] {
+            l = m + 1
+        } else {
+            r = m - 1
+        }
+    }
+    
+    return 0
+}
+
+//print(findPivot(nums: [4,5,6,7,8,9,10,0,1,2]))
+
+func binarySearch(nums: [Int], start: Int, end: Int, target: Int) -> Int {
+    
+    guard start <= end else { return -1 }
+    
+    if start == end {
+        if nums[start] == target {
+            return start
+        } else {
+            return -1
+        }
+    }
+    
+    let mid = start + (end - start)/2
+    
+    if nums[mid] == target {
+        return mid
+    } else if nums[mid] > target {
+        return binarySearch(nums: nums, start: start, end: mid - 1, target: target)
+    } else {
+        return binarySearch(nums: nums, start: mid + 1, end: end, target: target)
+    }
+}
+
+func rotatedArraySearch(_ nums: [Int], _ target: Int) -> Int {
+    
+    guard nums.count > 0 else { return -1 }
+    
+    if nums.count == 1 {
+        if nums[0] == target {
+            return 0
+        } else {
+            return -1
+        }
+    }
+    
+    let index = findPivot(nums: nums)
+    
+    let result = binarySearch(nums: nums, start: 0, end: index - 1 , target: target)
+    if result == -1 {
+        return binarySearch(nums: nums, start: index, end: nums.count - 1, target: target)
+    } else {
+        return result
+    }
+}
+
+print(rotatedArraySearch([9,10,0,1,2,3,4,5,6,7,8], 10))
+print(rotatedArraySearch([4,5,6,7,8,9,10,0,1,2], 9))
+print(rotatedArraySearch([4,5,6,7,0,1,2], 0))
+print(rotatedArraySearch([4,5,6,7,0,1,2], 3))
+
 //https://leetcode.com/problems/merge-intervals/
 func mergeIntervals(_ intervals: [[Int]]) -> [[Int]] {
     
