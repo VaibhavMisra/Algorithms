@@ -1,5 +1,57 @@
 import UIKit
 
+//https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+public class ListNode {
+    public var val: Int
+    public var next: ListNode?
+    public init(_ val: Int) {
+        self.val = val
+        self.next = nil
+    }
+}
+
+func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
+    
+    guard let head = head else { return nil }
+    
+    let dummyHead = ListNode(0)
+    dummyHead.next = head
+    
+    var fast: ListNode? = dummyHead
+    var slow: ListNode? = dummyHead
+    
+    for _ in 1...(n+1) {
+        fast = fast?.next
+    }
+    
+    while fast != nil {
+        slow = slow?.next
+        fast = fast?.next
+    }
+    slow!.next = slow?.next?.next
+
+    return dummyHead.next
+}
+
+let node1 = ListNode(1)
+let node2 = ListNode(2)
+let node3 = ListNode(3)
+let node4 = ListNode(4)
+let node5 = ListNode(5)
+
+//node1.next = node2
+node2.next = node3
+node3.next = node4
+node4.next = node5
+
+var head = removeNthFromEnd(node1, 1)
+
+while head != nil {
+    print(head?.val ?? "n/a")
+    head = head?.next
+}
+
+
 //https://leetcode.com/problems/search-in-rotated-sorted-array/
 func findPivot(nums: [Int]) -> Int {
     
