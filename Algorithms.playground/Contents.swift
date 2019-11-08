@@ -1,53 +1,44 @@
 import UIKit
 
 //https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
-
-func binarySearch(nums: [Int], start: Int, end: Int, target: Int) -> Int {
-    
-    guard start <= end else { return -1 }
-    
-    if start == end {
-        if nums[start] == target {
-            return start
-        } else {
-            return -1
-        }
-    }
-    
-    let mid = start + (end - start)/2
-    
-    if nums[mid] == target {
-        return mid
-    } else if nums[mid] > target {
-        return binarySearch(nums: nums, start: start, end: mid - 1, target: target)
-    } else {
-        return binarySearch(nums: nums, start: mid + 1, end: end, target: target)
-    }
-}
-
 func searchRange(_ nums: [Int], _ target: Int) -> [Int] {
     var result = [-1, -1]
-    let pos = binarySearch(nums: nums, start: 0, end: nums.count - 1, target: target)
-    print(pos)
-    if pos != -1 {
-        var first = pos
-        while first > -1 && nums[first] == target {
-            first -= 1
-        }
-        result[0] = first + 1
-        
-        
-        var last = pos
-        while last < nums.count && nums[last] == target {
-            last += 1
-        }
-        result[1] = last - 1
+    if nums.isEmpty {
+        return result
     }
+    var left = 0
+    var right = nums.count - 1
+    //search left
+    while left < right {
+        let mid = (left + right) / 2
+        if nums[mid] < target {
+            left = mid + 1
+        } else {
+            right = mid
+        }
+    }
+    if nums[left] != target {
+        return result
+    } else {
+        result[0] = left
+    }
+    
+    //search right
+    right = nums.count - 1
+    while left < right {
+        let mid = (left + right) / 2 + 1
+        if nums[mid] > target {
+            right = mid - 1
+        } else {
+            left = mid
+        }
+    }
+    result[1] = right
     return result
 }
 
-print(searchRange([1], 1))
-print(searchRange([5,7,7,8,8,10], 8))
+//print(searchRange([1], 1))
+//print(searchRange([5,7,7,8,8,10], 8))
 print(searchRange([5,7,7,8,8,10], 6))
 
 
