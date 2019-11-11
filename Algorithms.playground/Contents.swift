@@ -1,5 +1,20 @@
 import UIKit
 
+//https://leetcode.com/problems/longest-common-prefix/
+func longestCommonPrefix(_ strs: [String]) -> String {
+    guard !strs.isEmpty else { return "" }
+    guard strs.count > 1 else { return strs[0]}
+    
+    var common = strs[0]
+    for i in 1..<strs.count {
+        common = strs[i].commonPrefix(with: common)
+    }
+    return common
+}
+
+print(longestCommonPrefix(["flower","flow","flight"]))
+print(longestCommonPrefix(["dog","racecar","car"]))
+
 //https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
 func searchRange(_ nums: [Int], _ target: Int) -> [Int] {
     var result = [-1, -1]
