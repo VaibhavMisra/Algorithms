@@ -3,12 +3,23 @@ import UIKit
 //https://leetcode.com/problems/rotate-array/
 func rotate(_ nums: inout [Int], _ k: Int) {
     
-    guard k > 0 else { return }
-    
-    for _ in 0..<k {
-        let last = nums.removeLast()
-        nums.insert(last, at: 0)
+    func reverse(start: Int, end: Int, nums: inout [Int]) {
+        var s = start
+        var e = end
+        
+        while s < e {
+            let temp = nums[s]
+            nums[s] = nums[e]
+            nums[e] = temp
+            s += 1
+            e -= 1
+        }
     }
+    
+    let k = k % nums.count
+    reverse(start: 0, end: nums.count - 1, nums: &nums)
+    reverse(start: 0, end: k - 1, nums: &nums)
+    reverse(start: k, end: nums.count - 1, nums: &nums)
 }
 
 var array3 = [1, 2]
