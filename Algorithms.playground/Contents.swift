@@ -1,5 +1,28 @@
 import UIKit
 
+//https://leetcode.com/problems/rotate-array/
+func rotate(_ nums: inout [Int], _ k: Int) {
+    
+    guard k > 0 else { return }
+    
+    for _ in 0..<k {
+        let last = nums.removeLast()
+        nums.insert(last, at: 0)
+    }
+}
+
+var array3 = [1, 2]
+rotate(&array3, 1)
+print(array3)
+
+var array2 = [-1,-100,3,99]
+rotate(&array2, 2)
+print(array2)
+
+var array1 = [1,2,3,4,5,6,7]
+rotate(&array1, 3)
+print(array1)
+
 //https://leetcode.com/problems/longest-common-prefix/
 func longestCommonPrefix(_ strs: [String]) -> String {
     guard !strs.isEmpty else { return "" }
