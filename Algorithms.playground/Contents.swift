@@ -3,7 +3,19 @@ import UIKit
 //https://leetcode.com/problems/valid-anagram/
 func isAnagram(_ s: String, _ t: String) -> Bool {
     guard s.count == t.count else { return false }
-    return s.lowercased().sorted() == t.lowercased().sorted()
+    var count = [Character: Int]()
+    for c in s {
+        count[c, default: 0] += 1
+    }
+    for c in t {
+        count[c, default: 0] -= 1
+    }
+    for (_, value) in count {
+        if value != 0 {
+            return false
+        }
+    }
+    return true
 }
 
 print(isAnagram("anagram", "nagaram"))
