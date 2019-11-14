@@ -1,5 +1,12 @@
 import UIKit
 
+//https://leetcode.com/problems/valid-anagram/
+func isAnagram(_ s: String, _ t: String) -> Bool {
+    return s.lowercased().sorted() == t.lowercased().sorted()
+}
+
+print(isAnagram("anagram", "nagaram"))
+
 //https://leetcode.com/problems/rotate-array/
 func rotate(_ nums: inout [Int], _ k: Int) {
     
