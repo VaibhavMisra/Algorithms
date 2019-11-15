@@ -1,5 +1,24 @@
 import UIKit
 
+//https://leetcode.com/problems/majority-element/
+func majorityElement(_ nums: [Int]) -> Int {
+    let majorityLength = nums.count / 2 + 1
+    var result = nums[0]
+    var freq = [Int: Int]()
+    for num in nums {
+        freq[num, default: 0] += 1
+        if freq[num, default: 0] >= majorityLength {
+            result = num
+            break
+        }
+    }
+    return result
+}
+
+print(majorityElement([6,5,5]))
+print(majorityElement([3,2,3]))
+print(majorityElement([2,2,1,1,1,2,2]))
+
 //https://leetcode.com/problems/single-number/
 func singleNumber(_ nums: [Int]) -> Int {
     var result = 0
