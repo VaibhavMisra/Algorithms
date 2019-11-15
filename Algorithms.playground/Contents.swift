@@ -1,5 +1,25 @@
 import UIKit
 
+//https://leetcode.com/problems/majority-element-ii/
+func majorityElement2(_ nums: [Int]) -> [Int] {
+    let majorityLength = nums.count / 3 + 1
+    var result = Set<Int>()
+    var freq = [Int: Int]()
+    for num in nums {
+        freq[num, default: 0] += 1
+        if freq[num, default: 0] >= majorityLength {
+            result.insert(num)
+            if result.count > 1 {
+                break
+            }
+        }
+    }
+    return Array(result)
+}
+
+print(majorityElement2([3,2,3]))
+print(majorityElement2([1,1,1,3,3,2,2,2]))
+
 //https://leetcode.com/problems/majority-element/
 func majorityElement(_ nums: [Int]) -> Int {
     let majorityLength = nums.count / 2 + 1
