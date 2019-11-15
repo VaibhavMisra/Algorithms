@@ -1,5 +1,25 @@
 import UIKit
 
+//https://leetcode.com/problems/single-number/
+func singleNumber(_ nums: [Int]) -> Int {
+    var result = -1
+    var freq = [Int: Int]()
+    for num in nums {
+        freq[num, default: 0] += 1
+    }
+    
+    for (key, value) in freq {
+        if value == 1 {
+            result = key
+            break
+        }
+    }
+    return result
+}
+
+print(singleNumber([2,2,1]))
+print(singleNumber([4,1,2,1,2]))
+
 //https://leetcode.com/problems/valid-anagram/
 func isAnagram(_ s: String, _ t: String) -> Bool {
     guard s.count == t.count else { return false }
