@@ -2,17 +2,9 @@ import UIKit
 
 //https://leetcode.com/problems/single-number/
 func singleNumber(_ nums: [Int]) -> Int {
-    var result = -1
-    var freq = [Int: Int]()
+    var result = 0
     for num in nums {
-        freq[num, default: 0] += 1
-    }
-    
-    for (key, value) in freq {
-        if value == 1 {
-            result = key
-            break
-        }
+        result ^= num
     }
     return result
 }
