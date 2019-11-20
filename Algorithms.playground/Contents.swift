@@ -1,5 +1,110 @@
 import UIKit
 
+//https://leetcode.com/problems/missing-number/
+func missingNumber(_ nums: [Int]) -> Int {
+    let n = nums.count
+    let sum = (n*(n+1))/2
+    let currSum = nums.reduce(0, +)
+    return sum - currSum
+}
+
+print(missingNumber([3,0,1]))
+print(missingNumber([9,6,4,2,3,5,7,0,1]))
+
+
+//https://leetcode.com/problems/word-search/
+//func exist(_ board: [[Character]], _ word: String) -> Bool {
+//    guard word.count > 0 else { return false }
+//
+//
+//
+//    var startRow = 0
+//    var startCol = 0
+//    while startRow < board.count {
+//        startCol = 0
+//        while startCol < board[startRow].count {
+//            if board[startRow][startCol] == word.first {
+//                var row = startRow
+//                var col = startCol
+//                print("\n ~~~~~~~New Start~~~~~~~~ \n")
+//                print("\(row),\(col)")
+//                var currIndices = Set<[Int]>()
+//                currIndices.insert([row, col])
+//                var index = 1
+//                while index < word.count {
+//                    let nextIndex = word.index(word.startIndex, offsetBy: index)
+//                    let char = word[nextIndex]
+//                    print("char: \(char)")
+//                    if row >= 1 {
+//                        print("Checking top \(row-1),\(col)")
+//                        if board[row-1][col] == char { //Top
+//                            row -= 1
+//                            if currIndices.contains([row, col]) {
+//                                print("Not Top")
+//                                break
+//                            } else {
+//                                currIndices.insert([row, col])
+//                                index += 1
+//                                continue
+//                            }
+//                        }
+//                    }
+//                    if col >= 1 {
+//                        print("Checking left \(row),\(col-1)")
+//                        if board[row][col-1] == char { //Left
+//                            col -= 1
+//                            if !currIndices.contains([row, col]) {
+//                                currIndices.insert([row, col])
+//                                index += 1
+//                                continue
+//                            }
+//                        }
+//                    }
+//                    if col < board[startRow].count - 1 {
+//                        print("Checking right \(row),\(col+1)")
+//                        if board[row][col+1] == char { //Right
+//                            col += 1
+//                            if !currIndices.contains([row, col]) {
+//                                currIndices.insert([row, col])
+//                                index += 1
+//                                continue
+//                            }
+//                        }
+//                    }
+//                    if row < board.count - 1 && col < board[startRow].count - 1 {
+//                        print("Checking bottom \(row+1),\(col)")
+//                        if board[row+1][col] == char { //Bottom
+//                            row += 1
+//                            if !currIndices.contains([row, col]) {
+//                                currIndices.insert([row, col])
+//                                index += 1
+//                                continue
+//                            }
+//                        }
+//                    }
+//                    index += 1
+//                }
+//                if currIndices.count == word.count {
+//                    return true
+//                }
+//            }
+//            startCol += 1
+//        }
+//        startRow += 1
+//    }
+//    return false
+//}
+//
+//let board: [[Character]] = [
+//    ["A", "B", "C", "E"],
+//    ["S", "F", "C", "S"],
+//    ["A", "D", "E", "E"]
+//]
+////print(exist(board, "ABCCED"))
+//print(exist(board, "SEE"))
+//print(exist(board, "ABCB"))
+
+
 //https://leetcode.com/problems/majority-element-ii/
 func majorityElement2(_ nums: [Int]) -> [Int] {
     let majorityLength = nums.count / 3 + 1
