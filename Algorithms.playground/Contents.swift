@@ -1,5 +1,51 @@
 import UIKit
 
+//https://leetcode.com/problems/min-stack/
+
+class MinStack {
+
+    var data = [Int]()
+    var minData = [Int]()
+    
+    func push(_ x: Int) {
+        data.append(x)
+        if let last = minData.last {
+            minData.append(last > x ? x : last)
+        } else {
+            minData.append(x)
+        }
+    }
+    
+    func pop() {
+        data.popLast()
+        minData.popLast()
+    }
+    
+    func top() -> Int {
+        if let top = data.last {
+            return top
+        } else {
+            return -1
+        }
+    }
+    
+    func getMin() -> Int {
+        if let min  = minData.last {
+            return min
+        } else {
+            return -1
+        }
+    }
+}
+
+let obj = MinStack()
+obj.push(10)
+obj.push(12)
+obj.push(6)
+obj.pop()
+let ret_3: Int = obj.top()
+let ret_4: Int = obj.getMin()
+
 //https://leetcode.com/problems/house-robber/
 func rob(_ nums: [Int]) -> Int {
     if nums.count == 0 { return 0 }
