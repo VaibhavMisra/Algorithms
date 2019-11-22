@@ -1,5 +1,22 @@
 import UIKit
 
+//https://leetcode.com/problems/house-robber/
+func rob(_ nums: [Int]) -> Int {
+    if nums.count == 0 { return 0 }
+    if nums.count == 1 { return nums[0] }
+    if nums.count == 2 { return max(nums[0], nums[1]) }
+    // compare current element with previous non-adjacent elements each time, and then make updates to current position element
+    var nums = nums
+    for i in 2..<nums.count {
+        nums[i] += nums[0...i-2].max()!
+    }
+    return nums.max()!
+}
+
+print(rob([1,0,0,1]))
+print(rob([1,2,3,1]))
+print(rob([2,7,9,3,1]))
+
 //https://leetcode.com/problems/missing-number/
 func missingNumber(_ nums: [Int]) -> Int {
     let n = nums.count
