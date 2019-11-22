@@ -1,7 +1,25 @@
 import UIKit
 
-//https://leetcode.com/problems/min-stack/
+//https://leetcode.com/problems/move-zeroes/
+func moveZeroes(_ nums: inout [Int]) {
+    var start = 0
+    var end = nums.count - 1
+    while start < end {
+        if nums[start] == 0 {
+            nums.remove(at: start)
+            nums.append(0)
+            end -= 1
+        } else {
+            start += 1
+        }
+    }
+}
 
+var arr1 = [0,1,0,3,12]
+moveZeroes(&arr1)
+print(arr1)
+
+//https://leetcode.com/problems/min-stack/
 class MinStack {
 
     var data = [Int]()
