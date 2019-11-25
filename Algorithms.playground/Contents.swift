@@ -1,5 +1,24 @@
 import UIKit
 
+//https://leetcode.com/problems/intersection-of-two-arrays-ii/
+func intersect(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+    var map = [Int: Int]()
+    var res = [Int]()
+    for num in nums1 {
+        map[num, default: 0] += 1
+    }
+    for num in nums2 {
+        if let count = map[num], count > 0 {
+            res.append(num)
+            map[num] = count - 1
+        }
+    }
+    return res
+}
+
+print(intersect([1,2,2,1], [2,2]))
+print(intersect([4,9,5], [9,4,9,8,4]))
+
 //https://leetcode.com/problems/move-zeroes/
 func moveZeroes(_ nums: inout [Int]) {
     var start = 0
