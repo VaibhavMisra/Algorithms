@@ -1,5 +1,22 @@
 import UIKit
 
+//https://leetcode.com/problems/power-of-three/
+func isPowerOfThree(_ n: Int) -> Bool {
+    guard n != 0 else { return false }
+    var num = n
+    while num != 1 {
+        if num % 3 != 0 {
+            return false
+        }
+        num /= 3
+    }
+    return true
+}
+
+print(isPowerOfThree(82))
+print(isPowerOfThree(27))
+print(isPowerOfThree(0))
+
 //https://leetcode.com/problems/fizz-buzz/
 func fizzBuzz(_ n: Int) -> [String] {
     var result = [String]()
