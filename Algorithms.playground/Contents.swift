@@ -1,5 +1,24 @@
 import UIKit
 
+//https://leetcode.com/problems/fizz-buzz/
+func fizzBuzz(_ n: Int) -> [String] {
+    var result = [String]()
+    for i in 1...n {
+        if i % 3 == 0 && i % 5 == 0 {
+            result.append("FizzBuzz")
+        } else if i % 3 == 0 {
+            result.append("Fizz")
+        } else if i % 5 == 0 {
+            result.append("Buzz")
+        } else {
+            result.append("\(i)")
+        }
+    }
+    return result
+}
+
+print(fizzBuzz(15))
+
 //https://leetcode.com/problems/intersection-of-two-arrays-ii/
 func intersect(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
     var map = [Int: Int]()
