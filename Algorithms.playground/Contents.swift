@@ -1,5 +1,22 @@
 import UIKit
 
+//https://leetcode.com/problems/first-unique-character-in-a-string/
+func firstUniqChar(_ s: String) -> Int {
+    var map = [Character: Int]()
+    for char in s {
+        map[char, default: 0] += 1
+    }
+    for (index, char) in s.enumerated() {
+        if map[char] == 1 {
+            return index
+        }
+    }
+    return -1
+}
+
+print(firstUniqChar("leetcode"))
+print(firstUniqChar("loveleetcode"))
+
 //https://leetcode.com/problems/power-of-three/
 func isPowerOfThree(_ n: Int) -> Bool {
     guard n != 0 else { return false }
