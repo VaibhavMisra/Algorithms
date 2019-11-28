@@ -2,14 +2,18 @@ import UIKit
 
 //https://leetcode.com/problems/first-unique-character-in-a-string/
 func firstUniqChar(_ s: String) -> Int {
-    var map = [Character: Int]()
-    for char in s {
-        map[char, default: 0] += 1
+    var arr = Array(repeating: 0, count: 26)
+    for ch in s.unicodeScalars {
+        let val = Int(ch.value - UnicodeScalar("a").value)
+        arr[val] += 1
     }
-    for (index, char) in s.enumerated() {
-        if map[char] == 1 {
-            return index
+    var iter = 0
+    for ch in s.unicodeScalars {
+        let val = Int(ch.value - UnicodeScalar("a").value)
+        if arr[val] == 1 {
+            return iter
         }
+        iter += 1
     }
     return -1
 }
