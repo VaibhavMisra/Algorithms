@@ -1,5 +1,31 @@
 import UIKit
 
+//https://leetcode.com/problems/find-peak-element/
+func findPeakElement(_ nums: [Int]) -> Int {
+    let newNums = [Int.min] + nums + [Int.min]
+    var l = 0
+    var r = newNums.count - 1
+    while l < r {
+        let m = l + (r - l) / 2
+        if newNums[m] < newNums[m+1] {
+            l = m
+        } else if newNums[m] > newNums[m+1] {
+            if newNums[m-1] < newNums[m] {
+                return m - 1
+            } else {
+                r = m
+            }
+        }
+    }
+    return -1
+}
+
+print(findPeakElement([3,2,1]))
+print(findPeakElement([2,1]))
+print(findPeakElement([1]))
+print(findPeakElement([1,2,3,1]))
+print(findPeakElement([1,2,1,3,5,6,4]))
+
 //https://leetcode.com/problems/first-unique-character-in-a-string/
 func firstUniqChar(_ s: String) -> Int {
     var arr = Array(repeating: 0, count: 26)
