@@ -14,11 +14,15 @@ func setZeroes(_ matrix: inout [[Int]]) {
         }
     }
     
-    for (rowIndex, row) in matrix.enumerated() {
-        for (colIndex, _) in row.enumerated() {
-            if rows.contains(rowIndex) || columns.contains(colIndex) {
-                matrix[rowIndex][colIndex] = 0
-            }
+    for r in rows {
+        for i in 0..<matrix[r].count {
+            matrix[r][i] = 0
+        }
+    }
+    
+    for c in columns {
+        for i in 0..<matrix.count {
+            matrix[i][c] = 0
         }
     }
 }
@@ -34,6 +38,13 @@ var mat2 = [
   [3,4,5,2],
   [1,3,1,5]
 ]
+
+var mat3 = [
+    [0,1]
+]
+
+setZeroes(&mat3)
+print(mat3)
 
 setZeroes(&mat1)
 print(mat1)
