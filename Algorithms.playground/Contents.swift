@@ -1,5 +1,48 @@
 import UIKit
 
+//https://leetcode.com/problems/set-matrix-zeroes/
+func setZeroes(_ matrix: inout [[Int]]) {
+    var rows = Set<Int>()
+    var columns = Set<Int>()
+    
+    for (rowIndex, row) in matrix.enumerated() {
+        for (colIndex, col) in row.enumerated() {
+            if col == 0 {
+                rows.insert(rowIndex)
+                columns.insert(colIndex)
+            }
+        }
+    }
+    
+    for (rowIndex, row) in matrix.enumerated() {
+        for (colIndex, _) in row.enumerated() {
+            if rows.contains(rowIndex) || columns.contains(colIndex) {
+                matrix[rowIndex][colIndex] = 0
+            }
+        }
+    }
+}
+
+var mat1 = [
+  [1,1,1],
+  [1,0,1],
+  [1,1,1]
+]
+
+var mat2 = [
+  [0,1,2,0],
+  [3,4,5,2],
+  [1,3,1,5]
+]
+
+setZeroes(&mat1)
+print(mat1)
+
+setZeroes(&mat2)
+print(mat2)
+
+
+
 //https://leetcode.com/problems/find-peak-element/
 func findPeakElement(_ nums: [Int]) -> Int {
     let newNums = [Int.min] + nums + [Int.min]
