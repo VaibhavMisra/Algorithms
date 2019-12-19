@@ -1,5 +1,23 @@
 import UIKit
 
+
+//https://leetcode.com/problems/contains-duplicate/
+func containsDuplicate(_ nums: [Int]) -> Bool {
+    var setofInts = Set<Int>()
+    for num in nums {
+        if setofInts.contains(num) {
+            return true
+        } else {
+            setofInts.insert(num)
+        }
+    }
+    return false
+}
+
+print(containsDuplicate([1,2,3,1]))
+print(containsDuplicate([1,1,1,3,3,4,3,2,4,2]))
+print(containsDuplicate([1,2,3,4]))
+
 //https://leetcode.com/problems/set-matrix-zeroes/
 func setZeroes(_ matrix: inout [[Int]]) {
     var rows = Set<Int>()
