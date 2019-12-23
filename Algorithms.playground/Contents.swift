@@ -1,5 +1,32 @@
 import UIKit
 
+//https://leetcode.com/problems/sort-colors/
+func sortColors(_ nums: inout [Int]) {
+    guard nums.count > 1 else { return }
+    var idx = 0
+    var end = nums.count - 1
+    while idx <= end {
+        if nums[idx] == 2 {
+            nums.remove(at: idx)
+            nums.append(2)
+            end -= 1
+            if idx == nums.count - 1 { break }
+        } else if nums[idx] == 0 && idx > 0 {
+            nums.remove(at: idx)
+            nums.insert(0, at: 0)
+            idx += 1
+        } else {
+            idx += 1
+        }
+    }
+}
+
+var arr1 = [1, 0, 0, 1, 2, 0]
+sortColors(&arr1)
+
+var arr2 = [2,0,2,1,1,0]
+sortColors(&arr2)
+
 //https://leetcode.com/problems/valid-palindrome/
 func isPalindrome(_ s: String) -> Bool {
     guard s.isEmpty == false, s.count != 1 else { return true }
