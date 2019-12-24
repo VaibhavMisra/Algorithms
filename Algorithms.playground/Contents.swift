@@ -1,5 +1,34 @@
 import UIKit
 
+//https://leetcode.com/problems/gas-station/
+func canCompleteCircuit(_ gas: [Int], _ cost: [Int]) -> Int {
+    for i in 0..<gas.count {
+        let start = i
+        var fuel = gas[start]
+        var canComplete = true
+        print("\n\nStart at \(i)")
+        for j in 0..<gas.count {
+            let curr = (start + j) % gas.count
+            print("Current Fuel: \(fuel)\nCost to next: \(cost[curr])")
+            guard fuel >= cost[curr] else {
+                canComplete = false
+                break
+            }
+            
+            
+            let next = (start + j + 1) % gas.count
+            fuel += gas[next] - cost[curr]
+        }
+        if canComplete {
+            return i
+        }
+    }
+    return -1
+}
+
+//print(canCompleteCircuit([1,2,3,4,5], [3,4,5,1,2]))
+print(canCompleteCircuit([2,3,4], [3,4,3]))
+
 //https://leetcode.com/problems/sort-colors/
 func sortColors(_ nums: inout [Int]) {
     guard nums.count > 1 else { return }
