@@ -2,31 +2,28 @@ import UIKit
 
 //https://leetcode.com/problems/gas-station/
 func canCompleteCircuit(_ gas: [Int], _ cost: [Int]) -> Int {
-    for i in 0..<gas.count {
-        let start = i
-        var fuel = gas[start]
-        var canComplete = true
-        print("\n\nStart at \(i)")
-        for j in 0..<gas.count {
-            let curr = (start + j) % gas.count
-            print("Current Fuel: \(fuel)\nCost to next: \(cost[curr])")
-            guard fuel >= cost[curr] else {
-                canComplete = false
-                break
-            }
-            
-            
-            let next = (start + j + 1) % gas.count
-            fuel += gas[next] - cost[curr]
+    var totalGas = 0
+    var gasDeficit = 0
+    var index = 0
+    var startIndex = 0
+    while index < gas.count {
+        let gasGained = gas[index]-cost[index]
+        totalGas += gasGained
+        if totalGas < 0 {
+            gasDeficit += totalGas
+            totalGas = 0
+            startIndex = index+1
         }
-        if canComplete {
-            return i
-        }
+        index += 1
     }
-    return -1
+    if totalGas+gasDeficit < 0 {
+        return -1
+    } else {
+        return startIndex
+    }
 }
 
-//print(canCompleteCircuit([1,2,3,4,5], [3,4,5,1,2]))
+print(canCompleteCircuit([1,2,3,4,5], [3,4,5,1,2]))
 print(canCompleteCircuit([2,3,4], [3,4,3]))
 
 //https://leetcode.com/problems/sort-colors/
