@@ -1,5 +1,34 @@
 import UIKit
 
+//https://leetcode.com/problems/combination-sum-ii/
+func combinationSum2(_ candidates: [Int], _ target: Int) -> [[Int]] {
+    var result = [[Int]]()
+    var current = [Int]()
+    let sortedCandidates = candidates.sorted()
+    print(sortedCandidates)
+    backtracking(candidates: sortedCandidates, target: target, start: 0, current: &current, result: &result)
+    return result
+}
+
+func backtracking(candidates: [Int], target: Int, start: Int, current: inout [Int], result: inout [[Int]]) {
+    if target == 0 {
+        result.append(current)
+    } else if target > 0 {
+        for i in start..<candidates.count {
+            if i > start && candidates[i] == candidates[i-1] {
+                continue
+            }
+            current.append(candidates[i])
+            let remaining = target - candidates[i]
+            backtracking(candidates: candidates, target: remaining , start: i + 1, current: &current, result: &result)
+            current.removeLast()
+        }
+    }
+}
+
+let cand1 = [10,1,2,7,6,1,5]
+combinationSum2(cand1, 8)
+
 //https://leetcode.com/problems/gas-station/
 func canCompleteCircuit(_ gas: [Int], _ cost: [Int]) -> Int {
     var totalGas = 0
