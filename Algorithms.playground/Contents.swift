@@ -1,5 +1,19 @@
 import UIKit
 
+//https://leetcode.com/problems/reverse-string/
+func reverseString(_ s: inout [Character]) {
+    let last = s.count-1
+    for i in 0..<(s.count/2) {
+        let temp = s[i]
+        s[i] = s[last-i]
+        s[last-i] = temp
+    }
+}
+
+var arrCh: [Character] = ["h","e","l","l","o"]
+reverseString(&arrCh)
+print(arrCh)
+
 //https://leetcode.com/problems/happy-number/
 func isHappy(_ n: Int) -> Bool {
     var seen = Set<Int>()
