@@ -1,5 +1,111 @@
 import UIKit
 
+//https://leetcode.com/problems/happy-number/
+func isHappy(_ n: Int) -> Bool {
+    var seen = Set<Int>()
+    return isHappy(n, seen: &seen)
+}
+
+func isHappy(_ n: Int, seen: inout Set<Int>) -> Bool {
+    if n == 1 {
+        return true
+    }
+    else if seen.contains(n) {
+        return false
+    }
+    else if (n*n/10) == 0 {
+        return false
+    }
+    else {
+        let str = String(n)
+        let numbers = str.compactMap{ $0.wholeNumberValue }
+        var sum = 0
+        for number in numbers {
+            sum += number * number
+        }
+        seen.insert(n)
+        return isHappy(sum, seen: &seen)
+    }
+}
+
+print("4: \(isHappy(4))")
+print("7: \(isHappy(7))")
+print("2: \(isHappy(2))")
+print("19: \(isHappy(19))")
+
+//https://leetcode.com/problems/longest-palindromic-substring/
+
+func isPalindromeCh(_ chars: [Character]) -> Bool {
+    guard chars.isEmpty == false, chars.count != 1 else { return true }
+
+//    print("testing \(chars)")
+    var start = 0
+    var end = chars.count - 1
+    while start < end {
+        if chars[start] != chars[end] {
+//            print("\(chars[start]) != \(chars[end])")
+            return false
+        }
+        start += 1
+        end -= 1
+    }
+    return true
+}
+
+func longestPalindrome(_ s: String) -> String {
+    let chars = Array(s)
+    var len = 1
+    var longest = String(chars[0])
+    var dict = [[Character]: Bool]()
+    while len <= chars.count {
+        var offset = 0
+        while offset + len <= chars.count {
+//            print("Offset: \(offset), len: \(len)")
+            let trimChar = Array(chars[offset..<(len+offset)])
+            if trimChar.count == 1 {
+                dict[trimChar] = true
+            } else if trimChar.count == 2 {
+                dict[trimChar] = trimChar[0] == trimChar[1]
+            } else  {
+                let center = Array(chars[(offset+1)..<(len+offset-1)])
+                if let centerRes =  dict[center] {
+                    dict[trimChar] = centerRes && (chars[offset] == chars[(len+offset-1)])
+                }
+            }
+            
+            if dict[trimChar] == true && trimChar.count > longest.count {
+                longest = String(trimChar)
+            }
+            offset += 1
+        }
+        len += 1
+    }
+    return longest
+}
+
+//longestPalindrome("babcbab")
+//longestPalindrome("abbacaba")
+longestPalindrome("rgczcpratwyqxaszbuwwcadruayhasynuxnakpmsyhxzlnxmdtsqqlmwnbxvmgvllafrpmlfuqpbhjddmhmbcgmlyeypkfpreddyencsdmgxysctpubvgeedhurvizgqxclhpfrvxggrowaynrtuwvvvwnqlowdihtrdzjffrgoeqivnprdnpvfjuhycpfydjcpfcnkpyujljiesmuxhtizzvwhvpqylvcirwqsmpptyhcqybstsfgjadicwzycswwmpluvzqdvnhkcofptqrzgjqtbvbdxylrylinspncrkxclykccbwridpqckstxdjawvziucrswpsfmisqiozworibeycuarcidbljslwbalcemgymnsxfziattdylrulwrybzztoxhevsdnvvljfzzrgcmagshucoalfiuapgzpqgjjgqsmcvtdsvehewrvtkeqwgmatqdpwlayjcxcavjmgpdyklrjcqvxjqbjucfubgmgpkfdxznkhcejscymuildfnuxwmuklntnyycdcscioimenaeohgpbcpogyifcsatfxeslstkjclauqmywacizyapxlgtcchlxkvygzeucwalhvhbwkvbceqajstxzzppcxoanhyfkgwaelsfdeeviqogjpresnoacegfeejyychabkhszcokdxpaqrprwfdahjqkfptwpeykgumyemgkccynxuvbdpjlrbgqtcqulxodurugofuwzudnhgxdrbbxtrvdnlodyhsifvyspejenpdckevzqrexplpcqtwtxlimfrsjumiygqeemhihcxyngsemcolrnlyhqlbqbcestadoxtrdvcgucntjnfavylip")
+longestPalindrome("civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth")
+
+//https://leetcode.com/problems/remove-duplicates-from-sorted-list/
+
+
+// Definition for singly-linked list.
+//public class ListNode {
+//    public var val: Int
+//    public var next: ListNode?
+//    public init() { self.val = 0; self.next = nil; }
+//    public init(_ val: Int) { self.val = val; self.next = nil; }
+//    public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
+//}
+//
+//class Solution {
+//    func deleteDuplicates(_ head: ListNode?) -> ListNode? {
+//
+//    }
+//}
+
 //https://leetcode.com/problems/combination-sum-ii/
 func combinationSum2(_ candidates: [Int], _ target: Int) -> [[Int]] {
     var result = [[Int]]()
@@ -85,7 +191,7 @@ sortColors(&arr2)
 //https://leetcode.com/problems/valid-palindrome/
 func isPalindrome(_ s: String) -> Bool {
     guard s.isEmpty == false, s.count != 1 else { return true }
-    
+
     var input = s
     let unsafeChars = CharacterSet.alphanumerics.inverted
     input  = input.components(separatedBy: unsafeChars).joined(separator: "").lowercased()
